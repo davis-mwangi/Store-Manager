@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>users</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/util.css">
+	<link rel="stylesheet" type="text/css" href="../css/users.css">
+</head>
+
+<body>
+    <div class="container-full">
+            <header class="header">
+                    <nav>
+                        <div class="nav-left">
+                            <a href="./admin.html"><div class="logo">
+                                <img src="../images/davis-stores.png" height="40" width="100"></li>
+                            </div></a>
+                           <div class="search">
+                                <form>
+                                    <input type="text" placeholder="Search "/>
+                                    <button value="Submit" class="search-btn">Search</button>
+                                </form>
+                           </div>
+                            
+                        </div>
+                        <div class="nav-right">
+                            <ul>
+                              <li><a href="./admin.html">Home</a></li>
+                              <li><a href="#logout">Logout</a></li>
+                            </ul>
+                            
+                        </div>  
+                    </nav>
+                </header>
+               <div class="flex-row full-width">
+                    <div class="flex-col-sb sidebar">
+                          <ul>
+                            <a href="./user.html"><li>Store Attendants</li></a>
+                            <a href="./sales.html"><li>Sales Records</li></a>
+                          </ul>
+                    </div>
+                    <div class="flex-col-sb content">
+                      
+                      <main>
+                            <a href="./addUser.html"><button class="button" >Add Store Attendant</button></a>
+                            <div style="overflow-x:auto;">
+                                    <!--Table to display all Rides Created by the Driver-->
+                                    <table id="users">
+                                      <thead>
+                                          <tr>
+                                              <th>User ID</th>
+                                              <th>First Name</th>
+                                              <th>Last Name</th>
+                                              <th>Phone Number</th>
+                                              <th>Update Attendant</th>
+                                              <th>Delete Attendant</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>David</td>
+                                              <td>Mwangi</td>
+                                              <td>0700555877</td>
+                                              <td><a href="#update"><button class="user-btn btn-green">Update</button></a></td>
+                                              <td><a href="#delete"><button class="user-btn btn-red">Delete</button button></a></td>
+                                          </tr>
+                                          <tr>
+                                                <td>2</td>
+                                                <td>Agness</td>
+                                                <td>Wanjiru</td>
+                                                <td>0700666877</td>
+                                                <td><a href="#update"><button class="user-btn btn-green">Update</button></a></td>
+                                               <td><a href="#delete"><button class="user-btn btn-red">Delete</button button></a></td>
+                                            </tr>
+                                            <tr>
+                                                    <td>3</td>
+                                                    <td>Julius</td>
+                                                    <td>Mwangi</td>
+                                                    <td>0700666111</td>
+                                                    <td><a href="#update"><button class="user-btn btn-green">Update</button></a></td>
+                                                    <td><a href="#delete"><button class="user-btn btn-red">Delete</button button></a></td>
+                                                </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+
+                      </main>
+                     
+                </div>
+               </div>  
+
+                
+    </div>
+       
+</body> 
+</html>   
