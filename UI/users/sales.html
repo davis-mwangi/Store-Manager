@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>users</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/util.css">
+	<link rel="stylesheet" type="text/css" href="../css/users.css">
+</head>
+
+<body>
+    <div class="container-full">
+            <header class="header">
+                    <nav>
+                        <div class="nav-left">
+                            <a href="./admin.html"><div class="logo">
+                                <img src="../images/davis-stores.png" height="40" width="100"></li>
+                            </div></a>
+                           <div class="search">
+                                <form>
+                                    <input type="text" placeholder="Search "/>
+                                    <button value="Submit" class="search-btn">Search</button>
+                                </form>
+                           </div>
+                            
+                        </div>
+                        <div class="nav-right">
+                            <ul>
+                              <li><a href="./admin.html">Home</a></li>
+                              <li><a href="#logout">Logout</a></li>
+                            </ul>
+                            
+                        </div>  
+                    </nav>
+                </header>
+               <div class="flex-row full-width">
+                    <div class="flex-col-sb sidebar">
+                          <ul>
+                            <a href="./addSaleRecord.html"><li>Add Sale Record</li></a>
+                            <a href="./sales.html"><li>Sales Records</li></a>
+                          </ul>
+                    </div>
+                    <div class="flex-col-sb content">
+                      
+                      <main>
+                            <div style="overflow-x:auto;">
+                                    <!--Table to display all Rides Created by the Driver-->
+                                    <table id="users">
+                                      <thead>
+                                          <tr>
+                                              <th>Sale ID</th>
+                                              <th>Sale Date</th>
+                                              <th>Quantity</th>
+                                              <th>Total Price(KES)</th>
+                                              <th>Products sold</th>
+                                              
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>12/10/2018</td>
+                                              <td>6</td>
+                                              <td>2000</td>
+                                              <td>Rice(2Kg),Maize Floor(10kg), Sugar(15kp)</td>
+                                          </tr>
+                                          <tr>
+                                                <td>2</td>
+                                                <td>13/10/2018</td>
+                                                <td>6</td>
+                                                <td>5000</td>
+                                                <td>Rice(5Kg),Maize Floor(7kg), Sugar(10kg),Milk(10 litres)</td>
+                                            </tr>
+                                            <tr>
+                                                    <td>3</td>
+                                                    <td>14/10/2018</td>
+                                                    <td>10</td>
+                                                    <td>7000</td>
+                                                    <td>Sugar(10kg),Milk(10 litres), Wheat(20kg)</td>  
+                                            </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+
+                      </main>
+                     
+                </div>
+               </div>  
+
+                
+    </div>
+       
+</body> 
+</html>   
