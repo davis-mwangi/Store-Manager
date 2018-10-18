@@ -1,4 +1,3 @@
-
-[![Build Status](https://travis-ci.org/davis-mwangi/python-flask-api.svg?branch=develop)](https://travis-ci.org/davis-mwangi/python-flask-api)
+[![Build Status](https://travis-ci.org/davis-mwangi/Store-Manager.svg?branch=develop)](https://travis-ci.org/davis-mwangi/Store-Manager)
 
 # Store Manager
