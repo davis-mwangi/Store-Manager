@@ -102,3 +102,40 @@ def test_get_one_product(client):
         'instock': 5,
         'category': 'computers'
     }
+
+
+def test_returns_error_for_product_not_found(client):
+    """
+    Test if the supplied product id does not exist, responds with 404
+    and the error message
+    """
+    credentails = base64.b64encode(b'david@gmail.com:david').decode('utf-8')
+    response = get_json(client, '/api/v1/products/4', credentails)
+    assert response.status_code == 404
+    assert json_of_response(response) ==  \
+        {"error": "Product with id 4 is not found"}
+
+
+def test_attendant_can_create_sale_record(client):
+    """
+    Test if the store attendant can create a new sale record
+    """
+    sale_record = {
+
+        "sale_date": "17/10/2018",
+        "total_price": 2850,
+        "products_sold": [
+            {
+                "id": 1,
+                "product_name": "sugar",
+                "price_per_item": 200,
+                "items_sold": 10,
+                "total_amount": 2000
+            }
+
+        ]
+    }
+    credentials = base64.b64encode(b'julius@gmail.com:julius').decode('utf-8')
+    response = post_json(client, '/api/v1/sales', sale_record, credentials)
+    assert response.status_code == 201
+    assert json_of_response(response) == {'message': 'New Sale record created'}
