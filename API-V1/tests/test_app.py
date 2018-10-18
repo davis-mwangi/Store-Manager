@@ -83,4 +83,22 @@ def test_get_products(client):
     response = get_json(client, '/api/v1/products', credentials)
     data = json.loads(response.get_data(as_text=True))
     assert response.status_code == 200
-    assert len(data['products']) == 2
+    assert len(data['products']) == 3
+
+
+def test_get_one_product(client):
+    """
+    Test if sucessfull fetch of a single product status code 200 (OK)
+    if the response contains the contents of the product retrieved
+    """
+    credentails = base64.b64encode(b'david@gmail.com:david').decode('utf-8')
+    response = get_json(client, '/api/v1/products/1', credentails)
+    data = json.loads(response.get_data(as_text=True))
+    assert response.status_code == 200
+    assert data['product'] == {
+        'product_id': 1,
+        'product_name': 'dell laptop',
+        'price': 70000,
+        'instock': 5,
+        'category': 'computers'
+    }
