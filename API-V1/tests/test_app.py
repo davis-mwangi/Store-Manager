@@ -177,3 +177,74 @@ def test_only_admin_can_access_sale_records(client):
     auth = base64.b64encode(b'julius@gmail.com:julius').decode('utf-8')
     response = get_json(client, '/api/v1/sales', auth)
     assert response.status_code == 401
+
+
+def test_only_admin_can_access_sale_records(client):
+    """
+    Test only the admin/store owner can acces all the sale records
+    """
+    credentials = base64.b64encode(b'david@gmail.com:david').decode('utf-8')
+    response = get_json(client, '/api/v1/sales', credentials)
+    assert response.status_code == 200
+
+    auth = base64.b64encode(b'julius@gmail.com:julius').decode('utf-8')
+    response = get_json(client, '/api/v1/sales', auth)
+    assert response.status_code == 401
+
+
+def test_admin_can_access_a_sale_record(client):
+    """
+    Test admin/store owner can get a specific sale using sale_id
+    """
+    credentials = base64.b64encode(b'david@gmail.com:david').decode('utf-8')
+    response = get_json(client, '/api/v1/sales/1', credentials)
+    data = json.loads(response.get_data(as_text=True))
+    assert response.status_code == 200
+    assert json_of_response(response) == {
+        "sale_id": 1,
+        "sale_date": "15/10/2018",
+        "attendant_id": "julius@gmail.com",
+        "total_price": 150600,
+        "products_sold": [
+            {
+                "id": 1,
+                "product_name": "sugar",
+                "price_per_item": 200,
+                "items_sold": 3,
+                "total_amount": 600
+            },
+            {
+                "id": 2,
+                "product_name": "dell laptop",
+                "price_per_item": 50000,
+                "items_sold": 3,
+                "total_amount": 150000
+            }
+        ]
+    }
+
+
+def test_only_creator_of_sale_record_can_access_it(client):
+    """
+    Test only the creator of a sale record can access his/her sale record
+
+    """
+    credentials = base64.b64encode(b'julius@gmail.com:julius').decode('utf-8')
+    response = get_json(client, '/api/v1/sales/2', credentials)
+    data = json.loads(response.get_data(as_text=True))
+    assert response.status_code == 404
+    assert json_of_response(response) == {'error': 'sale record not found'}
+
+    response = get_json(client, '/api/v1/sales/1', credentials)
+    assert response.status_code == 200
+
+
+def test_unregistered_user_cannot_access_resources(client):
+    """
+    Test only registered users can access the endpoints \
+    sample out get '/products' endpoint
+    """
+    credentials = base64.b64encode(b'ayub@gmail.com:david').decode('utf-8')
+    response = get_json(client, '/api/v1/sales', credentials)
+    assert response.status_code == 401
+    assert json_of_response(response) == {'message': 'Access denied'}

@@ -5,7 +5,7 @@ from flask_restful import Api
 from models.user import User
 from resources.users import UserResource
 from resources.products import ProductsResource, ProductResource
-from resources.sales import SalesResource
+from resources.sales import SalesResource, SaleResource
 
 
 blueprint = Blueprint('store_manager', __name__)
@@ -26,6 +26,7 @@ api.add_resource(UserResource, '/register')
 api.add_resource(ProductsResource, '/products')
 api.add_resource(ProductResource, '/products/<int:product_id>')
 api.add_resource(SalesResource, '/sales')
+api.add_resource(SaleResource, '/sales/<int:sale_id>')
 
 
 app = Flask(__name__)
