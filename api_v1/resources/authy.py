@@ -1,7 +1,7 @@
 from flask import jsonify
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import safe_str_cmp
-from models.user import User
+from ..models.user import User
 
 auth = HTTPBasicAuth()
 
