@@ -57,6 +57,44 @@ def test_register_attendant(client):
                                           " created successfully"}
 
 
+def test_admin_add_existing_attendant(client):
+    """
+    Tests if systems gives error if admin  creates a user that already \
+    exists
+    """
+    user_data = {
+        'first_name': 'agness',
+        'last_name': 'wanjiru',
+        'email': 'agness@gmail.com',
+        'password': 'agness',
+        'age': 34
+    }
+    credentials = base64.b64encode(b'david@gmail.com:david').decode('utf-8')
+    response = post_json(client, '/api/v1/register', user_data, credentials)
+    response = post_json(client, '/api/v1/register', user_data, credentials)
+    assert response.status_code == 400
+    assert json_of_response(response) == {'message': 'store attendant ' +
+                                          'already exists'}
+
+
+def test_only_admin_can_add_attendant(client):
+    """
+    Test that only the admin or store owner can add attendant
+    i.e gives 401 (unauthorised acesss) as well as error message
+    """
+    user_data = {
+        'first_name': 'agness',
+        'last_name': 'wanjiru',
+        'email': 'agness@gmail.com',
+        'password': 'agness',
+        'age': 34
+    }
+    credentials = base64.b64encode(b'julius@gmail.com:julius').decode('utf-8')
+    response = post_json(client, '/api/v1/register', user_data, credentials)
+    assert response.status_code == 401
+    assert json_of_response(response) == {'message': 'Not authorised to acess'}
+
+
 def test_admin_can_add_product(client):
     """
     Test if admin can add a product to the store
@@ -71,6 +109,40 @@ def test_admin_can_add_product(client):
     response = post_json(client, '/api/v1/products', product, credentials)
     assert response.status_code == 201
     assert json_of_response(response) == {'message': 'New product created'}
+
+
+def test_products_exists_error(client):
+    """
+    Test if users creates a product that already exists
+    """
+    product = {
+        "product_name": "macbook pro",
+        "price": 70000,
+        "instock": 5,
+        "category": "computers"
+    }
+    credentials = base64.b64encode(b'david@gmail.com:david').decode('utf-8')
+    response = post_json(client, '/api/v1/products', product, credentials)
+    response = post_json(client, '/api/v1/products', product, credentials)
+    assert response.status_code == 400
+    assert json_of_response(response) == {'message': 'Product Already exists'}
+
+
+def test_attendant_cannot_create_product(client):
+    """
+    Test that only the admin can create a product \
+    """
+    product = {
+        "product_name": "macbook pro",
+        "price": 70000,
+        "instock": 5,
+        "category": "computers"
+    }
+    credentials = base64.b64encode(b'julius@gmail.com:julius').decode('utf-8')
+    response = post_json(client, '/api/v1/products', product, credentials)
+    assert response.status_code == 401
+    assert json_of_response(response) == {
+        'message': 'Not authorised to access '}
 
 
 def test_get_products(client):
