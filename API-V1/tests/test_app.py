@@ -72,3 +72,15 @@ def test_admin_can_add_product(client):
     response = post_json(client, '/api/v1/products', product, credentials)
     assert response.status_code == 201
     assert json_of_response(response) == {'message': 'New product created'}
+
+
+def test_get_products(client):
+    """
+    Test for a successful fetch of products 200 (ok) and
+    list length of the retrieved products is equal to default length of 2
+    """
+    credentials = base64.b64encode(b'david@gmail.com:david').decode('utf-8')
+    response = get_json(client, '/api/v1/products', credentials)
+    data = json.loads(response.get_data(as_text=True))
+    assert response.status_code == 200
+    assert len(data['products']) == 2
