@@ -2,6 +2,7 @@
 autopep8==1.4
 coverage==4.5.1
 coveralls==1.5.1
+gunicorn-19.9.0
 Flask==1.0.2
 Flask-HTTPAuth==3.2.4
 Flask-RESTful==0.3.6
