@@ -2,8 +2,7 @@ import json
 import pytest
 import base64
 
-
-from app.app import app
+from api_v1.app.app import app
 
 
 @pytest.fixture
