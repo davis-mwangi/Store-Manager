@@ -4,6 +4,7 @@ from flask_restful import Api
 
 from models.user import User
 from resources.users import UserResource
+from resources.products import ProductsResource
 
 
 blueprint = Blueprint('store_manager', __name__)
@@ -21,6 +22,7 @@ User.users.append(User(2, 'julius', 'mwangi', 'julius@gmail.com',
 
 
 api.add_resource(UserResource, '/register')
+api.add_resource(ProductsResource, '/products')
 
 
 app = Flask(__name__)

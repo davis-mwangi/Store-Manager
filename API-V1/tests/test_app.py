@@ -56,3 +56,19 @@ def test_register_attendant(client):
     assert response.status_code == 201
     assert json_of_response(response) == {"message": "New user" +
                                           " created successfully"}
+
+
+def test_admin_can_add_product(client):
+    """
+    Test if admin can add a product to the store
+    """
+    product = {
+        "product_name": "macbook pro",
+        "price": 70000,
+        "instock": 5,
+        "category": "computers"
+    }
+    credentials = base64.b64encode(b'david@gmail.com:david').decode('utf-8')
+    response = post_json(client, '/api/v1/products', product, credentials)
+    assert response.status_code == 201
+    assert json_of_response(response) == {'message': 'New product created'}
