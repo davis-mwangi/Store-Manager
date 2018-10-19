@@ -18,6 +18,6 @@ def get_password(username, password):
 
 def authenticate(username, password):
     for user in User.users:
-        if user.email == username and safe_str_cmp(
+        if user.username == username and safe_str_cmp(
                 user.password, password):
             return user

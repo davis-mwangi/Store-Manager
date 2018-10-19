@@ -3,54 +3,7 @@ from .users import User
 from .authy import auth
 
 
-sales = [
-    {
-        'sale_id': 1,
-        'sale_date': '15/10/2018',
-        'attendant_id': 'julius@gmail.com',
-        'total_price': 150600,
-        'products_sold': [
-            {
-                'id': 1,
-                'product_name': 'sugar',
-                'price_per_item': 200,
-                'items_sold': 3,
-                'total_amount': 600
-            },
-            {
-
-                'id': 2,
-                'product_name': 'dell laptop',
-                'price_per_item': 50000,
-                'items_sold': 3,
-                'total_amount': 150000
-            }
-        ]
-    },
-    {
-        'sale_id': 2,
-        'sale_date': '15/10/2018',
-        'attendant_id': 'stella@gmail.com',
-        'total_price': 150600,
-        'products_sold': [
-            {
-                'id': 1,
-                'product_name': 'sugar',
-                'price_per_item': 200,
-                'items_sold': 3,
-                'total_amount': 600
-            },
-            {
-
-                'id': 2,
-                'product_name': 'dell laptop',
-                'price_per_item': 50000,
-                'items_sold': 3,
-                'total_amount': 150000
-            }
-        ]
-    }
-]
+sales = []
 
 
 class SalesResource(Resource):
@@ -83,17 +36,17 @@ class SalesResource(Resource):
         """
         data = SalesResource.parser.parse_args()
         for user in User.users:
-            if user.role == 'admin' and user.email == auth.username():
+            if user.role == 'admin' and user.username == auth.username():
                 return {'error': 'Not authorised to access'}, 401
 
-            if user.role == 'attendant' and user.email == auth.username():
+            if user.role == 'attendant' and user.username == auth.username():
                 if next(filter(lambda x:
                                x['attendant_id'] == auth.username() and
                                x['sale_date'] == data['sale_date'],
                                sales), None):
                     return {'error': 'Sale record already exists'}, 400
 
-                sale_record = {'sale_id': sales[-1].get('sale_id') + 1,
+                sale_record = {'sale_id': 1,  # (sales[-1].get('sale_id') + 1),
                                'sale_date': data['sale_date'],
                                'attendant_id': auth.username(),
                                'total_price': data['total_price'],
@@ -108,10 +61,10 @@ class SalesResource(Resource):
         If admin authorize, else if attendant deny access
         """
         for user in User.users:
-            if user.role == 'attendant' and user.email == auth.username():
+            if user.role == 'attendant' and user.username == auth.username():
                 return {'message': 'Not authorised to access '}, 401
 
-            if user.role == 'admin' and user.email == auth.username():
+            if user.role == 'admin' and user.username == auth.username():
                 return {"sales": sales}, 200
 
 
@@ -123,7 +76,7 @@ class SaleResource(Resource):
         attendant username
         """
         for user in User.users:
-            if user.role == 'attendant' and user.email == auth.username():
+            if user.role == 'attendant' and user.username == auth.username():
                 sale = next(filter(lambda x: x['sale_id'] == sale_id and
                                    x['attendant_id'] == auth.username(),
                                    sales), None)
@@ -131,7 +84,7 @@ class SaleResource(Resource):
                     return sale
                 return {'error': 'sale record not found'}, 404
 
-            if user.role == 'admin' and user.email == auth.username():
+            if user.role == 'admin' and user.username == auth.username():
                 sale = next(filter(lambda x: x['sale_id'] == sale_id,
                                    sales), None)
                 if sale is not None:

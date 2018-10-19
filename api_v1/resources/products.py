@@ -49,9 +49,10 @@ class ProductsResource(Resource):
         """
         data = ProductsResource.parser.parse_args()
         for user in User.users:
-            if user.role == 'attendant' and user.email == auth.username():
+            if user.role == 'attendant' and user.username == auth.username():
                 return {'message': 'Not authorised to access '}, 401
-            if user.role == 'admin' and user.email == auth.username():
+                
+            if user.role == 'admin' and user.username == auth.username():
                 if next(filter(lambda x: x['product_name'] ==
                                data['product_name'], products), None):
                     return {'message': 'Product Already exists'}, 400

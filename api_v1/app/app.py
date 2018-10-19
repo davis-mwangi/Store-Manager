@@ -13,13 +13,12 @@ api = Api(blueprint, prefix='/api/v1')
 
 
 # Create an admin
-User.users.append(User(1, 'david', 'mwangi',
-                       'david@gmail.com', 27, '0700111222',
-                       'david', 'admin'))
+User.users.append(User(1, 'david mwangi', 'david@gmail.com',
+                       'david398', 'david', 'admin'))
 
 # Create  store attendant
-User.users.append(User(2, 'julius', 'mwangi', 'julius@gmail.com',
-                       35, '0723000777', 'julius', 'attendant'))
+User.users.append(User(2, 'julius mwangi', 'julius@gmail.com',
+                       'julius2018', 'julius', 'attendant'))
 
 
 api.add_resource(UserResource, '/register')

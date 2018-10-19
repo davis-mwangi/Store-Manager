@@ -5,6 +5,13 @@ python:
 
 install:
   - pip install -r requirements.txt
+  - pip install coveralls
+  - pip install codeclimate-test-reporter
+
 
 script:
   -  py.test --cov=api_v1 tests/ --disable-warnings
+
+after_success:
+  - coveralls
+  - codeclimate-test-reporter  
