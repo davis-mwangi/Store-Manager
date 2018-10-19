@@ -44,13 +44,12 @@ def test_register_attendant(client):
     when a new attendant is created
     """
     user_data = {
-        'first_name': 'agness',
-        'last_name': 'wanjiru',
-        'email': 'agness@gmail.com',
-        'password': 'agness',
-        'age': 34
+        "name": "agness wanjiru",
+        "email": "agness@gmail.com",
+        "username": "agness2018",
+        "password": "agness"
     }
-    credentials = base64.b64encode(b'david@gmail.com:david').decode('utf-8')
+    credentials = base64.b64encode(b'david398:david').decode('utf-8')
     response = post_json(client, '/api/v1/register', user_data, credentials)
     assert response.status_code == 201
     assert json_of_response(response) == {"message": "New user" +
@@ -63,13 +62,12 @@ def test_admin_add_existing_attendant(client):
     exists
     """
     user_data = {
-        'first_name': 'agness',
-        'last_name': 'wanjiru',
-        'email': 'agness@gmail.com',
-        'password': 'agness',
-        'age': 34
+        "name": "agness wanjiru",
+        "email": "agness@gmail.com",
+        "username": "agness2018",
+        "password": "agness"
     }
-    credentials = base64.b64encode(b'david@gmail.com:david').decode('utf-8')
+    credentials = base64.b64encode(b'david398:david').decode('utf-8')
     response = post_json(client, '/api/v1/register', user_data, credentials)
     response = post_json(client, '/api/v1/register', user_data, credentials)
     assert response.status_code == 400
@@ -83,13 +81,12 @@ def test_only_admin_can_add_attendant(client):
     i.e gives 401 (unauthorised acesss) as well as error message
     """
     user_data = {
-        'first_name': 'agness',
-        'last_name': 'wanjiru',
-        'email': 'agness@gmail.com',
-        'password': 'agness',
-        'age': 34
+        "name": "agness wanjiru",
+        "email": "agness@gmail.com",
+        "username": "agness2018",
+        "password": "agness"
     }
-    credentials = base64.b64encode(b'julius@gmail.com:julius').decode('utf-8')
+    credentials = base64.b64encode(b'julius2018:julius').decode('utf-8')
     response = post_json(client, '/api/v1/register', user_data, credentials)
     assert response.status_code == 401
     assert json_of_response(response) == {'message': 'Not authorised to acess'}
@@ -105,7 +102,7 @@ def test_admin_can_add_product(client):
         "instock": 5,
         "category": "computers"
     }
-    credentials = base64.b64encode(b'david@gmail.com:david').decode('utf-8')
+    credentials = base64.b64encode(b'david398:david').decode('utf-8')
     response = post_json(client, '/api/v1/products', product, credentials)
     assert response.status_code == 201
     assert json_of_response(response) == {'message': 'New product created'}
@@ -121,7 +118,7 @@ def test_products_exists_error(client):
         "instock": 5,
         "category": "computers"
     }
-    credentials = base64.b64encode(b'david@gmail.com:david').decode('utf-8')
+    credentials = base64.b64encode(b'david398:david').decode('utf-8')
     response = post_json(client, '/api/v1/products', product, credentials)
     response = post_json(client, '/api/v1/products', product, credentials)
     assert response.status_code == 400
@@ -138,7 +135,7 @@ def test_attendant_cannot_create_product(client):
         "instock": 5,
         "category": "computers"
     }
-    credentials = base64.b64encode(b'julius@gmail.com:julius').decode('utf-8')
+    credentials = base64.b64encode(b'julius2018:julius').decode('utf-8')
     response = post_json(client, '/api/v1/products', product, credentials)
     assert response.status_code == 401
     assert json_of_response(response) == {
@@ -150,7 +147,7 @@ def test_get_products(client):
     Test for a successful fetch of products 200 (ok) and
     list length of the retrieved products is equal to default length of 2
     """
-    credentials = base64.b64encode(b'david@gmail.com:david').decode('utf-8')
+    credentials = base64.b64encode(b'david398:david').decode('utf-8')
     response = get_json(client, '/api/v1/products', credentials)
     data = json.loads(response.get_data(as_text=True))
     assert response.status_code == 200
@@ -162,7 +159,7 @@ def test_get_one_product(client):
     Test if sucessfull fetch of a single product status code 200 (OK)
     if the response contains the contents of the product retrieved
     """
-    credentails = base64.b64encode(b'david@gmail.com:david').decode('utf-8')
+    credentails = base64.b64encode(b'david398:david').decode('utf-8')
     response = get_json(client, '/api/v1/products/1', credentails)
     data = json.loads(response.get_data(as_text=True))
     assert response.status_code == 200
@@ -180,7 +177,7 @@ def test_returns_error_for_product_not_found(client):
     Test if the supplied product id does not exist, responds with 404
     and the error message
     """
-    credentails = base64.b64encode(b'david@gmail.com:david').decode('utf-8')
+    credentails = base64.b64encode(b'david398:david').decode('utf-8')
     response = get_json(client, '/api/v1/products/4', credentails)
     assert response.status_code == 404
     assert json_of_response(response) ==  \
@@ -206,7 +203,7 @@ def test_attendant_can_create_sale_record(client):
 
         ]
     }
-    credentials = base64.b64encode(b'julius@gmail.com:julius').decode('utf-8')
+    credentials = base64.b64encode(b'julius2018:julius').decode('utf-8')
     response = post_json(client, '/api/v1/sales', sale_record, credentials)
     assert response.status_code == 201
     assert json_of_response(response) == {'message': 'New Sale record created'}
@@ -231,7 +228,7 @@ def test_admin_cannot_create_sale_record(client):
 
         ]
     }
-    credentials = base64.b64encode(b'david@gmail.com:david').decode('utf-8')
+    credentials = base64.b64encode(b'david398:david').decode('utf-8')
     response = post_json(client, '/api/v1/sales', sale_record, credentials)
     assert response.status_code == 401
     assert json_of_response(response) == {'error': 'Not authorised to access'}
@@ -241,7 +238,7 @@ def test_only_admin_can_access_sale_records(client):
     """
     Test only the admin/store owner can acces all the sale records
     """
-    credentials = base64.b64encode(b'david@gmail.com:david').decode('utf-8')
+    credentials = base64.b64encode(b'david398:david').decode('utf-8')
     response = get_json(client, '/api/v1/sales', credentials)
     assert response.status_code == 200
 
@@ -254,11 +251,11 @@ def test_only_admin_can_access_sale_records(client):
     """
     Test only the admin/store owner can acces all the sale records
     """
-    credentials = base64.b64encode(b'david@gmail.com:david').decode('utf-8')
+    credentials = base64.b64encode(b'david398:david').decode('utf-8')
     response = get_json(client, '/api/v1/sales', credentials)
     assert response.status_code == 200
 
-    auth = base64.b64encode(b'julius@gmail.com:julius').decode('utf-8')
+    auth = base64.b64encode(b'julius2018:julius').decode('utf-8')
     response = get_json(client, '/api/v1/sales', auth)
     assert response.status_code == 401
 
@@ -267,32 +264,10 @@ def test_admin_can_access_a_sale_record(client):
     """
     Test admin/store owner can get a specific sale using sale_id
     """
-    credentials = base64.b64encode(b'david@gmail.com:david').decode('utf-8')
+    credentials = base64.b64encode(b'david398:david').decode('utf-8')
     response = get_json(client, '/api/v1/sales/1', credentials)
     data = json.loads(response.get_data(as_text=True))
     assert response.status_code == 200
-    assert json_of_response(response) == {
-        "sale_id": 1,
-        "sale_date": "15/10/2018",
-        "attendant_id": "julius@gmail.com",
-        "total_price": 150600,
-        "products_sold": [
-            {
-                "id": 1,
-                "product_name": "sugar",
-                "price_per_item": 200,
-                "items_sold": 3,
-                "total_amount": 600
-            },
-            {
-                "id": 2,
-                "product_name": "dell laptop",
-                "price_per_item": 50000,
-                "items_sold": 3,
-                "total_amount": 150000
-            }
-        ]
-    }
 
 
 def test_only_creator_of_sale_record_can_access_it(client):
@@ -300,7 +275,7 @@ def test_only_creator_of_sale_record_can_access_it(client):
     Test only the creator of a sale record can access his/her sale record
 
     """
-    credentials = base64.b64encode(b'julius@gmail.com:julius').decode('utf-8')
+    credentials = base64.b64encode(b'julius2018:julius').decode('utf-8')
     response = get_json(client, '/api/v1/sales/2', credentials)
     data = json.loads(response.get_data(as_text=True))
     assert response.status_code == 404
@@ -315,7 +290,7 @@ def test_unregistered_user_cannot_access_resources(client):
     Test only registered users can access the endpoints \
     sample out get '/products' endpoint
     """
-    credentials = base64.b64encode(b'ayub@gmail.com:david').decode('utf-8')
+    credentials = base64.b64encode(b'ayub2018:david').decode('utf-8')
     response = get_json(client, '/api/v1/sales', credentials)
     assert response.status_code == 401
     assert json_of_response(response) == {'message': 'Access denied'}
