@@ -46,7 +46,9 @@ class SalesResource(Resource):
                                sales), None):
                     return {'error': 'Sale record already exists'}, 400
 
-                sale_record = {'sale_id': 1,  # (sales[-1].get('sale_id') + 1),
+                sale_record = {'sale_id': sales[-1].get('sale_id') + 1
+                               # prevent index out of range error
+                               if len(sales) > 0 else 1,
                                'sale_date': data['sale_date'],
                                'attendant_id': auth.username(),
                                'total_price': data['total_price'],
