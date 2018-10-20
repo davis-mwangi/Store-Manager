@@ -112,6 +112,11 @@ body, html {
 .search form button:hover{
     background-color: #1a82a8;
 }
+
+.custom{
+ color: #999292;
+}
+
 .full-width{
     width: 100%;
 }
@@ -132,17 +137,13 @@ h1 {
   }
   .sidebar ul a li {
     padding: 10px;
-    background-color: #009fda;
     margin: 5px;
-    color: white;
-     text-align: center;
+    color: black;
+    text-align: left;
+    font-size: 15px;
   }
   .sidebar ul a li:hover {
-    padding: 10px;
-    background-color: #23667f;
-    margin: 5px;
-    color: white;
-     text-align: center;
+    background-color: #eee;
   }
   .content{
     width: 80%;
@@ -151,7 +152,7 @@ h1 {
   }
   
   .product{
-     border: 1px solid #eee;
+     border: 1px solid #fff;
      display: inline-block;
      padding: 10px;
   }
@@ -162,19 +163,59 @@ h1 {
     box-shadow: 0 2px 3px #ccc;
  }
   .product img{
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
     display: block
   }
-  .product h3{
-    text-align: center;
-    color: #333;
+
+  .prod-price{
+    float: right;
+    font-size: 12px;
+
   }
+
+  .prod-name{
+    float: left;
+    font-size: 18px;
+  }
+
+  /*Product Details*/
+  .product-details{
+    border: 1px solid #fff;
+    display: block;
+    padding: 10px;
+    width: 100%;
+  }
+  .product-details img{
+    width: 400px;
+    height: 400px;
+    float: left;
+  }
+
+ .prod-details-wrap{
+   float: left;
+   margin-bottom: 10px;
+   background: #f3f5f9;
+   padding: 10px 0 15px 10px;
+   width: 50%;
+
+ }
+ .prod-details-wrap h3{
+   font-size: 20px;
+   color: #184552;
+   margin-bottom: 20px;
+ }
+ .prod-details-wrap h4{
+   font-size: 15px;
+   color: #35424a;
+   margin-bottom: 20px;
+ }
   .button{
     padding: 10px 15px;
     background-color: #009fda;
     border: 1px solid #009fda;
     border-radius: 5px;
+    width: 30%;
     color: white;
   }
   .button:hover{

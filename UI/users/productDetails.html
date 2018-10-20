@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Admin</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/util.css">
+	<link rel="stylesheet" type="text/css" href="../css/users.css">
+</head>
+
+<body>
+    <div class="container-full">
+            <header class="header">
+                    <nav>
+                        <div class="nav-left">
+                            <div class="logo">
+                                <img src="../images/davis-stores.png" height="40" width="100"></li>
+                            </div>
+                           <div class="search">
+                                <form>
+                                    <input type="text" placeholder="Search product"/>
+                                    <button value="Submit" class="search-btn">Search</button>
+                                </form>
+                           </div>
+                            
+                        </div>
+                        <div class="nav-right">
+                            <ul>
+                               <li><a href="./addProduct.html">Add Product</a></li>
+                              <li><a href="./user.html">Users</a></li>
+                              <li><a href="#logout">Logout</a></li>
+                            </ul>
+                            
+                        </div>  
+                    </nav>
+                </header>
+               <div class="flex-row full-width">
+                    <div class="flex-col-sb sidebar">
+                          <ul>
+                            <a href="#cat1"><li><i class="fa fa-angle-double-right custom" ></i> Smart Phones & Computers</li></a>
+                            <a href="#cat2"><li><i class="fa fa-angle-double-right custom" ></i> Electronics</li></a>
+                            <a href="#cat3"><li><i class="fa fa-angle-double-right custom" ></i> Clothes</li></a>
+                          </ul>
+                    </div>
+                    <div class="flex-col-sb content">
+                      <main>
+                          <div class="product-details m-t-5 m-b-5 m-l-5  m-r-5">
+                              <img src="../images/laptop.png"/>
+
+                              <div class="prod-details-wrap m-l-20 p-b-20">
+
+                                  <div class="name">
+                                    <h2>Dell XPS 13</h2>
+                                  </div>
+                                  <div class="price">
+                                      <span>Price :</span>
+                                      <h3>84,000</h3>
+                                  </div>
+                                  <div class="instock">
+                                      <span>Quantity in Stoct: </span>
+                                      <h3>10</h3>
+                                  </div>
+                                  <div class="max-quanity">
+                                      <span>Max Quantity purchasable: </span>
+                                      <h3>3</h3>
+                                  </div> 
+                                  <button class="button m-t-10">Add to Cart</button> 
+                              </div>
+                          </div>  
+                      </main>
+                     
+                </div>
+               </div>  
+
+                
+    </div>
+       
+</body> 
+</html>   
