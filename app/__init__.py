@@ -2,10 +2,10 @@ from flask import Flask, jsonify, Blueprint
 from flask_restful import Api
 
 
-from ..models.user import User
-from ..resources.users import UserResource
-from ..resources.products import ProductsResource, ProductResource
-from ..resources.sales import SalesResource, SaleResource
+from .api.v1.models.user import User
+from .api.v1.views.users import UserResource
+from .api.v1.views.products import ProductsResource, ProductResource
+from .api.v1.views.sales import SalesResource, SaleResource
 
 
 blueprint = Blueprint('store_manager', __name__)
