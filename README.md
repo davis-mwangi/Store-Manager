@@ -11,7 +11,6 @@ Store Manager is a web application that helps store owners manage sales and prod
 Clone the repo into your local machine and run below commands
 ```
 cd Store-Manager
-git checkout develop
 pip install -r requirements.txt
 ```
 How to run the app on windows or unix 
