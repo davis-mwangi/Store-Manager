@@ -233,6 +233,14 @@ h1 {
     background-color: #0d4d0d;
     border: 1px solid #0d4d0d;
   }
+  .red {
+    background-color: #cc3030;
+    border: #cc3030;
+  }
+  .red:hover{
+    background-color: #a30e0e;
+    border: #a30e0e;
+  }
 
 
   /*****USers*********************/
