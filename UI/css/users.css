@@ -212,18 +212,26 @@ h1 {
  }
   .button{
     padding: 10px 15px;
-    background-color: #009fda;
-    border: 1px solid #009fda;
     border-radius: 5px;
     width: 30%;
     color: white;
   }
-  .button:hover{
-    padding: 10px 15px;
+  .blue{
+    background-color: #009fda;
+    border: 1px solid #009fda;
+  }
+  .blue:hover{
     background-color: #23667f;
     border: 1px solid #23667f;
-    border-radius: 5px;
-    color: white;
+  }
+  .green{
+    background-color: green;
+    border: 1px solid green;
+
+  }
+  .green:hover{
+    background-color: #0d4d0d;
+    border: 1px solid #0d4d0d;
   }
 
 
