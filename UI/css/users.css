@@ -281,17 +281,9 @@ h1 {
  .user-btn{
    padding: 10px 15px;
    border-radius: 5px;
- }
- .btn-green{
    color: white;
-   background-color: green;
-   border: 1px solid green;
  }
- .btn-red{
-   color: white;
-   background-color: red;
-   border: 1px solid red;
- }
+
  /********Style Form*******/
  #form
  {
