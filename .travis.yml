@@ -10,7 +10,7 @@ install:
 
 
 script:
-  -  py.test --cov=app/tests/v1 
+  -  py.test --cov=app/tests/v1  --disable-warnings
 
 after_success:
   - coveralls
