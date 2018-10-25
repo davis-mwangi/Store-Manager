@@ -47,3 +47,4 @@ def test_only_admin_can_add_attendant(client):
     response = post_json(client, '/api/v1/register', user_data, credentials)
     assert response.status_code == 401
     assert json_of_response(response) == {'message': 'Not authorised to acess'}
+

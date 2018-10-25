@@ -59,7 +59,6 @@ def create_tables():
         cur.execute(command)
     cur.close()
     conn.commit()
-    conn.close()
 
 
 if __name__ == '__main__':
