@@ -3,6 +3,12 @@ import base64
 
 from .utility import client, json_of_response, get_json, post_json
 
+user_data = {
+    "name": "sdfgvhjkhgfdsfghkj",
+    "email": "agness2018@gmail.com",
+    "password": "Q@aaaaaaa66"
+}
+
 
 def test_register_attendant(client):
     """
@@ -10,13 +16,8 @@ def test_register_attendant(client):
     response is 'New user Created Successfully'
     when a new attendant is created
     """
-    user_data = {
-        "name": "agness wanjiru",
-        "email": "agness@gmail.com",
-        "username": "agness2018",
-        "password": "agness"
-    }
-    credentials = base64.b64encode(b'david398:david').decode('utf-8')
+
+    credentials = base64.b64encode(b'david398:David2018$$').decode('utf-8')
     response = post_json(client, '/api/v1/register', user_data, credentials)
     assert response.status_code == 201
     assert json_of_response(response) == {"message": "New user" +
@@ -28,13 +29,8 @@ def test_admin_add_existing_attendant(client):
     Tests if systems gives error if admin  creates a user that already \
     exists
     """
-    user_data = {
-        "name": "agness wanjiru",
-        "email": "agness@gmail.com",
-        "username": "agness2018",
-        "password": "agness"
-    }
-    credentials = base64.b64encode(b'david398:david').decode('utf-8')
+
+    credentials = base64.b64encode(b'david398:David2018$$').decode('utf-8')
     response = post_json(client, '/api/v1/register', user_data, credentials)
     response = post_json(client, '/api/v1/register', user_data, credentials)
     assert response.status_code == 400
@@ -47,13 +43,7 @@ def test_only_admin_can_add_attendant(client):
     Test that only the admin or store owner can add attendant
     i.e gives 401 (unauthorised acesss) as well as error message
     """
-    user_data = {
-        "name": "agness wanjiru",
-        "email": "agness@gmail.com",
-        "username": "agness2018",
-        "password": "agness"
-    }
-    credentials = base64.b64encode(b'julius2018:julius').decode('utf-8')
+    credentials = base64.b64encode(b'julius2018:Julius2018@').decode('utf-8')
     response = post_json(client, '/api/v1/register', user_data, credentials)
     assert response.status_code == 401
     assert json_of_response(response) == {'message': 'Not authorised to acess'}
