@@ -16,10 +16,10 @@ def client(request):
     return test_client
 
 
-def post_json(client, url, json_dict):
+def post_json(client, url, json_dict, token):
     return client.post(url, data=json.dumps(json_dict),
                        content_type='application/json',
-                       )
+                       headers={'Authorization': 'Bearer ' + token})
 
 
 def json_of_response(response):

@@ -55,12 +55,26 @@ user_data = {
 }
 
 
+def create_mock_token(client):
+    mock_login_data = {
+        "username": "david398",
+        "password": "David2018$$"
+    }
+    response = client.post('/api/v2/auth/login',
+                           data=json.dumps(mock_login_data),
+                           content_type='application/json')
+    json_response = json_of_response(response)
+    token = json_response['access_token']
+    return token
+
+
 def test_add_existing_attendant(client):
     """
     Tests for duplication of username
     """
 
-    response = post_json(client, '/api/v2/auth/signup', user_data)
+    response = post_json(client, '/api/v2/auth/signup', user_data,
+                         create_mock_token(client))
     assert response.status_code == 400
     assert json_of_response(response) == {'message': 'store attendant ' +
                                           'already exists'}
@@ -76,7 +90,8 @@ def test_invalid_email(client):
         "email": "invalid_email",
         "password": "Q@aaaaaaa66"
     }
-    response = post_json(client, '/api/v2/auth/signup', incorect_data)
+    response = post_json(client, '/api/v2/auth/signup', incorect_data,
+                         create_mock_token(client))
     assert response.status_code == 400
     assert json_of_response(response) == {
         "message": {
@@ -95,7 +110,8 @@ def test_valid_name(client):
         "email": "invalid_email",
         "password": "Q@aaaaaaa66"
     }
-    response = post_json(client, '/api/v2/auth/signup', incorect_data)
+    response = post_json(client, '/api/v2/auth/signup', incorect_data,
+                         create_mock_token(client))
     assert response.status_code == 400
     assert json_of_response(response) == {
         "message": {

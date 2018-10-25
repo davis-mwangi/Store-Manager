@@ -1,7 +1,12 @@
 from flask_restful import Resource, reqparse
-from flask_jwt_extended import create_access_token
-from ..models.user_model import User
+from flask_jwt_extended import (
+    create_access_token,
+    jwt_required,
+    get_jwt_claims
+)
 from werkzeug.security import safe_str_cmp
+
+from ..models.user_model import User
 from ..shared.validation import (
     validate_name,
     validate_password,
@@ -21,16 +26,17 @@ class UserLogin(Resource):
                         required=True,
                         )
 
-    @classmethod
-    def post(cls):
+    def post(self):
         data = UserLogin.parser.parse_args()
         # find user in database
         user = User.find_by_username(data['username'])
+        user_obj = (user.firstname, user.lastname,
+                    user.role, user.username)
         # check password
         if user and safe_str_cmp(user.password, data['password']):
             # create access token
             access_token = create_access_token(
-                identity=user.username)
+                identity=user_obj)
             return{
                 'access_token': access_token
             }, 200
@@ -60,11 +66,16 @@ class UserRegister(Resource):
                         required=True,
                         )
 
+    @jwt_required
     def post(self):
+        claims = get_jwt_claims()
+        if claims['role'] != 'admin':
+            return {"message": "Admin privilege required"}, 401
+
         data = UserRegister.parser.parse_args()
-
         username = data['email'].split('@')[0]
-
+        user = User.find_by_username(username)
+        
         if User.find_by_username(username):
             return {'message': 'store attendant already exists'}, 400
 
