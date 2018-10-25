@@ -16,6 +16,12 @@ def client(request):
     return test_client
 
 
+def post_json(client, url, json_dict):
+    return client.post(url, data=json.dumps(json_dict),
+                       content_type='application/json',
+                       )
+
+
 def json_of_response(response):
     """Decode json from response"""
     return json.loads(response.data.decode('utf8'))

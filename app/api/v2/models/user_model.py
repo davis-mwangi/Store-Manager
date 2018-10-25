@@ -5,10 +5,11 @@ from ..shared.config import conn
 
 class User(object):
 
-    def __init__(self, _id, name, email, role, username,
+    def __init__(self, _id, firstname, lastname, email, role, username,
                  password):
         self.id = _id,
-        self.name = name
+        self.firstname = firstname
+        self.lastname = lastname
         self.email = email
         self.role = role
         self.username = username
@@ -57,4 +58,16 @@ class User(object):
         conn.close()
         return user
 
-   
+    @classmethod
+    def save_to_db(cls, firstname, lastname, email, role, username, password):
+        cursor = conn.cursor()
+        query = """
+                INSERT INTO users(firstname,lastname,email,role,username, \
+                password) \
+                VALUES (%s,%s,%s,%s,%s,%s);
+                """
+        cursor.execute(query, (firstname, lastname,
+                               email, role, username, password))
+
+        conn.commit()
+        cursor.close()
