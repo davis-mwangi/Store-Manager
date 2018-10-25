@@ -1,5 +1,4 @@
 import json
-import base64
 
 from .utility import client, json_of_response, post_json
 

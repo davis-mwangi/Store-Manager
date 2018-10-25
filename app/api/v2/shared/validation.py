@@ -3,6 +3,7 @@ import re
 
 EMAIL_REGEX = re.compile(r'^[A-Za-z0-9\.\+_-]+@[A-Za-z0-9\._-]+\.[a-zA-Z]*$')
 SPECIAL_CHARS = '[@_!#$%^&*()<>?/\|}{~:]'
+NUMERIC_REGEX = re.compile(r"^[0-9]+$")
 
 
 def check_blank(value):
@@ -31,6 +32,13 @@ def validate_name(value):
     return value
 
 
+def numeric_only(value):
+    check_blank(value)
+    if not NUMERIC_REGEX.match(value):
+        raise ValueError("Only numbers required for this field")
+    return value
+
+
 def validate_password(password):
 
     if not any(char.isdigit() for char in password):
@@ -51,3 +59,10 @@ def validate_password(password):
         raise ValueError(
             'length of password should be 8 charatcers or more')
     return password
+
+
+def validate_product_name(value):
+    check_blank(value)
+    if value.isdigit():
+        raise ValueError("Product name  cannot be numerics only")
+    return value
