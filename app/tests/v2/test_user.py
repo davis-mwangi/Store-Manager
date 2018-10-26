@@ -117,3 +117,41 @@ def test_valid_name(client):
             "firstname": "Invalid name"
         }
     }
+
+
+# ############## Grant Admin Rights ###################
+
+def test_role_change(client):
+    """
+        Test  user role change
+        """
+    update_data = {
+        "role": "attendant",
+        "username": "julius2018"
+    }
+    response = post_json(client, '/api/v2/auth/change', update_data,
+                         create_mock_token(client))
+    assert response.status_code == 200
+    assert json_of_response(response) == {"message": "User role changed"}
+
+    # change back to orginal role
+    update_data = {
+        "role": "admin",
+        "username": "julius2018"
+    }
+    response = post_json(client, '/api/v2/auth/change', update_data,
+                         create_mock_token(client))
+
+
+def test_admin_rights_already_granted(client):
+    update_data = {
+        "role": "admin",
+        "username": "julius2018"
+    }
+    response = post_json(client, '/api/v2/auth/change', update_data,
+                         create_mock_token(client))
+    response = post_json(client, '/api/v2/auth/change', update_data,
+                         create_mock_token(client))
+    assert response.status_code == 400
+    assert json_of_response(response) == {
+        "message": "Admin rights already granted"}

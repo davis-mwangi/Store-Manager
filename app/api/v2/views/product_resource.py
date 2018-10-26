@@ -59,4 +59,3 @@ class ProductResource(Resource):
             product.delete_product(prod_id)
             return {"message": "Product deleted"}, 200
         return {"error": "Product not found"}, 404
-

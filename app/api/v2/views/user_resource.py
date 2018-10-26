@@ -87,3 +87,30 @@ class UserRegister(Resource):
         return {"message": "New user created successfully"}, 201
 
 
+class ChangeRole(Resource):
+    parser = reqparse.RequestParser()
+    parser.add_argument('role',
+                        type=check_blank,
+                        required=True
+                        )
+    parser.add_argument('username',
+                        type=check_blank,
+                        required=True,
+                        )
+
+    @jwt_required
+    def post(self):
+        claims = get_jwt_claims()
+        if claims['role'] != 'admin':
+            return {"message": "Admin privilege required"}, 401
+
+        data = ChangeRole.parser.parse_args()
+        user = User.find_by_username(data['username'])
+
+        if user is not None:
+            if user.role == data['role'] == 'admin':
+                return{"message": "Admin rights already granted"}, 400
+
+            User.grant_admin_right(data['role'], data['username'])
+            return{"message": "User role changed"}, 200
+        return {"error": "User not found"}, 404

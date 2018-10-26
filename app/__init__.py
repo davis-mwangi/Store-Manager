@@ -7,8 +7,7 @@ from .api.v2.shared.create_tables import create_tables
 from .api.v2.views.user_resource import (
     UserLogin,
     UserRegister,
-
-    
+    ChangeRole
 )
 from .api.v2.views.product_resource import ProductResource
 
@@ -20,7 +19,7 @@ api = Api(blueprint, catch_all_404s=True, prefix='/api/v2')
 api.add_resource(UserLogin, '/auth/login')
 api.add_resource(UserRegister,  '/auth/signup')
 api.add_resource(ProductResource, '/products/<int:prod_id>')
-
+api.add_resource(ChangeRole, '/auth/change')
 
 
 app = Flask(__name__)

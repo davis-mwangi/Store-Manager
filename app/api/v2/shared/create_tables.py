@@ -56,16 +56,16 @@ def create_tables():
          DELETE FROM products;
         """
         """
-        INSERT INTO products (product_id,prod_name,prod_price,instock, 
-          max_purchasable,cat_id) VALUES (1,'Safari 2018','3000',10,3,1);
+        INSERT INTO products (product_id,prod_name,prod_price,instock, \
+          max_purchasable,cat_id) VALUES (1,'Safari 2018','3000',10,3,1);\
         """,
         """
-        INSERT INTO products (product_id,prod_name,prod_price,instock, 
-          max_purchasable,cat_id) VALUES (2,'Akpara Shoes','4000',15,3,1);  
+        INSERT INTO products (product_id,prod_name,prod_price,instock, \
+          max_purchasable,cat_id) VALUES (2,'Akpara Shoes','4000',15,3,1);  \
         """,
         """
-        INSERT INTO products (product_id,prod_name,prod_price,instock, 
-          max_purchasable,cat_id) VALUES (3,'Timberland','4500',20,3,1);  
+        INSERT INTO products (product_id,prod_name,prod_price,instock, \
+          max_purchasable,cat_id) VALUES (3,'Timberland','4500',20,3,1);  \
         """
     )
 
