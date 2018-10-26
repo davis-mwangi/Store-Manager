@@ -42,9 +42,32 @@ def test_products_not_found(client):
     """
     Tests when user updates product that doesnt exist
     """
-    response = post_json(client, '/api/v2/products/2', updated_prod,
+    response = post_json(client, '/api/v2/products/20', updated_prod,
                          create_mock_token(client))
 
     assert response.status_code == 404
     assert json_of_response(response) ==  \
         {"error": "failed to update, product not found"}
+
+
+def test__product(client):
+    """
+    Test successful deletion of product
+    """
+    response = client.delete('/api/v2/products/2',
+                             headers={"Authorization": "Bearer " +
+                                      create_mock_token(client)})
+
+    assert response.status_code == 200
+    assert json_of_response(response) == {"message": "Product deleted"}
+
+
+def test_delete_non_exist_product(client):
+    """
+    Test response if product to be deleted does not exist
+    """
+    response = client.delete('/api/v2/products/20',
+                             headers={"Authorization": "Bearer " +
+                                      create_mock_token(client)})
+    assert response.status_code == 404
+    assert json_of_response(response) == {"error": "Product not found"}

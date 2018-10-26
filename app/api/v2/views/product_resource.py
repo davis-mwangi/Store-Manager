@@ -47,3 +47,16 @@ class ProductResource(Resource):
                 data['cat_id'],  prod_id,)
             return{"message": "Product Updated"}, 200
         return {"error": "failed to update, product not found"}, 404
+
+    @jwt_required
+    def delete(self, prod_id):
+        claims = get_jwt_claims()
+        if claims['role'] != 'admin':
+            return {"message": "Admin privilege required"}, 401
+
+        product = ProductModel.find_product_by_id(prod_id)
+        if product:
+            product.delete_product(prod_id)
+            return {"message": "Product deleted"}, 200
+        return {"error": "Product not found"}, 404
+

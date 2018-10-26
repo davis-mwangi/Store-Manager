@@ -59,3 +59,15 @@ class ProductModel(object):
                                category, _id))
         conn.commit()
         cursor.close()
+
+    def delete_product(self, prod_id):
+        rows_deleted = 0
+        try:
+
+            cur = conn.cursor()
+            query = "DELETE FROM products WHERE product_id=%s"
+            cur.execute(query, (prod_id,))
+            conn.commit()
+            cur.close()
+        except(Exception, psycopg2.DatabaseError) as error:
+            print(error)

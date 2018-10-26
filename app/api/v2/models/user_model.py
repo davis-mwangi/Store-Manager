@@ -71,3 +71,14 @@ class User(object):
 
         conn.commit()
         cursor.close()
+
+    @classmethod
+    def grant_admin_right(self, role, username):
+        query = """UPDATE users
+                SET role=(%s)
+                WHERE username=%s
+                """
+        cursor = conn.cursor()
+        cursor.execute(query, (role, username))
+        User.conn.commit()
+        cursor.close()

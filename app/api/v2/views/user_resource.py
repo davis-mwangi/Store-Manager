@@ -85,3 +85,5 @@ class UserRegister(Resource):
                         'attendant', username, data['password'])
 
         return {"message": "New user created successfully"}, 201
+
+
