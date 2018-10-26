@@ -50,7 +50,7 @@ def test_products_not_found(client):
         {"error": "failed to update, product not found"}
 
 
-def test__product(client):
+def test_delete_product(client):
     """
     Test successful deletion of product
     """
